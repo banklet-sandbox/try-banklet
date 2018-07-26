@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<banklet-app xmlns="http://afp.avaloq.com/xml/ns/banklet-app-1-0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://afp.avaloq.com/xml/ns/banklet-app-1-0.xsd ./banklet-app-1-0.xsd"
+             version="1.0">
+    <module>
+        <name>com.avaloq.afp.banklet.try.banklet-web</name>
+        <display-name>Try Banklet</display-name>
+        <type>ctrl-url</type>
+        <base-url>${afp.ctx}/com.avaloq.afp.banklet.try.banklet/try-banklet/index.html</base-url>
+        <banklet>
+            <name>VIEW_1</name>
+            <display-name>Main Banklet View</display-name>
+            <!--
+            Set banklet specific configuration parameters that can be set in orchestration.
+
+            Example:
+            feature for adding extra css file at banklet loading time. DEPRECATED in favor of Central CSS feature
+                <param>
+                    <name>themeName</name>
+                    <type>string</type>
+                </param>
+            -->
+
+            <params>
+                <!--
+                <param>
+                    <name></name>
+                    <type></type>
+                </param>
+                -->
+            </params>
+        </banklet>
+    </module>
+</banklet-app>

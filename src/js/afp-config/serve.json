@@ -1,0 +1,10 @@
+{
+    "proxies"  : {
+        "com.avaloq.afs.rest.services": {
+            "baseUrl"      : "",
+            "stripFromPath": "",
+            "authPath"     : "",
+            "contractNr"   : ""
+        }
+    }
+}

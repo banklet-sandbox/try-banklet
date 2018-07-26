@@ -1,0 +1,21 @@
+{
+  "name": "try-banklet",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {},
+  "private": true,
+  "license": "AVQ",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "@avaloq/afp-widgets": "^2.0.0"
+  },
+  "devDependencies": {
+    "@avaloq/afp-mocks": "^2.0.0",
+    "@avaloq/afp-releases": "^2.0.1",
+    "@avaloq/afp-test": "^2.0.0",
+    "grunt": "^1.0.3",
+    "grunt-cli": "^1.2.0"
+  }
+}

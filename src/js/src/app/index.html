@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <!--
+    Edit this file with care. Many parts of it are required to use AFP-JS features.
+
+        - Links and Scripts with an id starting with afp-js-banklet-* can be centralised at runtime. See the
+        Central Resource Service in the showcase for details.
+
+        - The meta tags optimize integration into banklet orchestration as well as provide caching policy
+    -->
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Try Banklet</title>
+    <link id="afp-js-banklet-css" href="app.css" rel="stylesheet">
+</head>
+<body>
+
+    <div afp-height-resize="true" class="afp-g">
+        <div class="afp-g12-5">
+            <img src="/static/logo.png" alt="avaloq"/>
+        </div>
+        <div ng-view></div>
+    </div>
+
+    <script src="app.js" language="JavaScript"></script>
+    <script id="afp-js-banklet-locale" src="../locale.js"></script>
+    <script src="/orchestration/js/platform.js"></script>
+    <script id="afp-js-banklet-config" src="../{avaloq.front.web.portal.context}/resource/default/default/config/default" defer="true"></script>
+    <script id="afp-js-banklet-translation" src="../{avaloq.front.web.portal.context}/resource/default/default/translation/default" defer="true"></script>
+</body>
+</html>

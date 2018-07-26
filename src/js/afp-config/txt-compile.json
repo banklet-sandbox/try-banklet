@@ -1,0 +1,8 @@
+{
+    "options": {
+        "module": "app"
+    },
+    "entries": [
+        {"dest": "src/app/translations.js", "src": ["po/*.po"]}
+    ]
+}

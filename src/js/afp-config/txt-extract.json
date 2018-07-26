@@ -1,0 +1,11 @@
+{
+    "entries": [
+        {
+            "dest": "po/template.pot",
+            "src": ["src/**/*.html", "src/**/*.js"]
+        }
+    ],
+    "options": {
+        "markerName": "translate"
+    }
+}

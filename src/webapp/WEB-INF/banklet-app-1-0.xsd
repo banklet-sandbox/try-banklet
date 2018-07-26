@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:banklet="http://afp.avaloq.com/xml/ns/banklet-app-1-0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://afp.avaloq.com/xml/ns/banklet-app-1-0.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
+	<annotation>
+		<documentation>
+		This is the XML Schema for the Avaloq Banklet 1.0 deployment descriptor.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+		The following conventions apply to all deployment descriptor elements unless indicated otherwise.
+		- In elements that specify a pathname to a file within the same JAR file, relative filenames (i.e., those not
+		  starting with "/") are considered relative to the root of the JAR file's namespace.  Absolute filenames (i.e., those
+		  starting with "/") also specify names in the root of the JAR file's namespace.  In general, relative names are
+		  preferred.  The exception is .war files where absolute names are preferred for consistency with the Servlet API.
+		</documentation>
+	</annotation>
+	<!-- *********************************************************** -->
+	<import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+	<element name="banklet-app" type="banklet:banklet-appType">
+		<annotation>
+			<documentation>
+			The banklet-app element is the root of the deployment descriptor for a banklet application.
+			This element has a required attribute version to specify to which version of the schema the deployment descriptor conforms.
+			</documentation>
+		</annotation>
+		<unique name="banklet-name-uniqueness">
+			<annotation>
+				<documentation>
+				The banklet element contains the name of a banklet.
+				This name must be unique within the banklet application.
+				 </documentation>
+			</annotation>
+			<selector xpath="banklet:banklet"/>
+			<field xpath="banklet:banklet-name"/>
+		</unique>
+	</element>
+
+	<complexType name="banklet-appType">
+		<sequence>
+			<element name="module" type="banklet:moduleType" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="version" type="banklet:string" use="required"/>
+	</complexType>
+
+	<complexType name="moduleType">
+		<annotation>
+			<documentation>
+			The module element contains the declarative data of a banklet module. 
+			</documentation>
+		</annotation>
+		<sequence>
+      <element name="name"           type="banklet:nameType"/>
+      <element name="display-name"   type="banklet:display-nameType"/>
+      <element name="type"           type="banklet:module-typeType"/>
+      <element name="base-url"       type="banklet:string" minOccurs="0"/>
+      <element name="ctrl-url"       type="banklet:string" minOccurs="0"/>
+      <element name="description"    type="banklet:descriptionType" minOccurs="0"/>
+      <element name="permissions"    type="banklet:permission-listType" minOccurs="0"/>
+      <element name="banklet"        type="banklet:bankletType" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="permission-listType">
+		<sequence>
+			<element name="permission" type="banklet:permissionType" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+  <simpleType name="permissionType">
+    <restriction base="banklet:string">
+      <enumeration value="isPopup"/>
+      <enumeration value="fireLogout"/>
+      <enumeration value="openPopup"/>
+      <enumeration value="showDialog"/>
+      <enumeration value="setAppParameters"/>
+      <enumeration value="windowName"/>
+    </restriction>
+  </simpleType>
+
+  <complexType name="bankletType">
+    <annotation>
+      <documentation>
+      </documentation>
+    </annotation>
+    <sequence>
+      <element name="name"           type="banklet:nameType"/>
+      <element name="display-name"   type="banklet:display-nameType"/>
+      <element name="description"    type="banklet:descriptionType" minOccurs="0"/>
+      <element name="permissions"    type="banklet:permission-listType" minOccurs="0"/>
+      <element name="params"         type="banklet:param-listType" minOccurs="0"/>
+      <element name="messages"       type="banklet:message-listType" minOccurs="0"/>
+      <element name="events"         type="banklet:event-listType" minOccurs="0"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="nameType">
+    <annotation>
+      <documentation>
+      The banklet-name element contains the canonical name of the banklet.
+      Each banklet name is unique within the banklet application.
+      </documentation>
+    </annotation>
+    <simpleContent>
+      <extension base="banklet:string"/>
+    </simpleContent>
+  </complexType>
+
+  <complexType name="descriptionType">
+    <annotation>
+      <documentation>
+      The description element is used to provide text describing the parent element.
+      The description element should include any information that the banklet application war file producer wants
+      to provide to the consumer of the banklet application war file (i.e., to the Deployer). 
+      Typically, the tools used by the banklet application war file consumer will display the 
+      description when processing the parent element that contains the description. 
+      It has an optional attribute xml:lang to indicate which language is used in the description according to 
+      RFC 1766 (http://www.ietf.org/rfc/rfc1766.txt). 
+      The default value of this attribute is English(“en”).
+      Used in: param, banklet, banklet-app
+      </documentation>
+    </annotation>
+    <simpleContent>
+      <extension base="banklet:string">
+        <attribute ref="xml:lang"/>
+      </extension>
+    </simpleContent>
+  </complexType>
+
+	<complexType name="display-nameType">
+		<annotation>
+			<documentation>
+			The display-name type contains a short name that is intended to be displayed by tools.
+			It is used by display-name elements. The display name need not be unique.
+			Example:
+				...
+	  			<display-name xml:lang="en">Employee Self Service</display-name>
+
+			It has an optional attribute xml:lang to indicate which language is used in the description according to RFC 1766 (http://www.ietf.org/rfc/rfc1766.txt).
+			The default value of this attribute is English(“en”).
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="banklet:string">
+				<attribute ref="xml:lang"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+  <simpleType name="module-typeType">
+    <restriction base="banklet:string">
+      <enumeration value="vaadin"/>
+      <enumeration value="ctrl-url"/>
+      <enumeration value="ctrl-msg"/>
+    </restriction>
+  </simpleType>
+
+  <complexType name="event-listType">
+    <sequence>
+      <element name="event" type="banklet:eventType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="eventType">
+    <annotation>
+      <documentation>
+      </documentation>
+    </annotation>
+    <sequence>
+      <element name="name"           type="banklet:nameType"/>
+      <element name="display-name"   type="banklet:display-nameType" minOccurs="0"/>
+      <element name="description"    type="banklet:descriptionType" minOccurs="0"/>
+      <element name="params"         type="banklet:param-listType" minOccurs="0"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="message-listType">
+    <sequence>
+      <element name="message" type="banklet:messageType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="messageType">
+    <annotation>
+      <documentation>
+      </documentation>
+    </annotation>
+    <sequence>
+      <element name="name"           type="banklet:nameType"/>
+      <element name="display-name"   type="banklet:display-nameType" minOccurs="0"/>
+      <element name="description"    type="banklet:descriptionType" minOccurs="0"/>
+      <element name="params"         type="banklet:param-listType" minOccurs="0"/>
+    </sequence>
+  </complexType>
+
+	<complexType name="param-listType">
+		<sequence>
+			<element name="param" type="banklet:paramType" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="paramType">
+		<sequence>
+			<element name="kind" type="banklet:param-kindType" minOccurs="0"/>
+			<element name="name" type="banklet:param-nameType"/>
+			<element name="type" type="banklet:param-typeType"/>
+			<element name="mandatory" type="xs:boolean" minOccurs="0"/>
+			<element name="enum" type="banklet:param-enumType" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="value" type="banklet:param-valueType" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<simpleType name="param-kindType">
+		<annotation>
+			<documentation>
+			The kind element contains the kind of a parameter (default is config). 
+			Used in: param-list, ...
+			</documentation>
+		</annotation>
+		<restriction base="banklet:string">
+			<enumeration value="config"/>
+			<enumeration value="runtime"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="param-nameType">
+		<annotation>
+			<documentation>
+			The name element contains the name of a parameter. 
+			Used in: param-list, ...
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="banklet:string"/>
+		</simpleContent>
+	</complexType>
+
+	<simpleType name="param-typeType">
+		<annotation>
+			<documentation>
+			The type element contains the type of a parameter. 
+			Used in: param-list, ...
+			</documentation>
+		</annotation>
+		<restriction base="banklet:string">
+			<enumeration value="string"/>
+			<enumeration value="number"/>
+			<enumeration value="boolean"/>
+			<enumeration value="date"/>
+			<enumeration value="datetime"/>
+			<enumeration value="enum"/>
+			<enumeration value="json"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="param-enumType">
+		<annotation>
+			<documentation>
+			The enum element contains an enumeration element of a parameter. 
+			Used in: param-list, ...
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="banklet:string">
+				<attribute name="id" type="banklet:string" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="param-valueType">
+		<annotation>
+			<documentation>
+			The value element contains the value of a parameter. 
+			Used in: param-list, ...
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="banklet:string"/>
+		</simpleContent>
+	</complexType>
+
+	<simpleType name="string">
+		<annotation>
+			<documentation>
+			This is a special string datatype that is defined as a base type for defining collapsed strings.
+			When schemas require trailing/leading space elimination as well as collapsing the existing whitespace, this base type may be used.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+
+</schema>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID"
+         version="3.0">
+    <display-name>Try Banklet</display-name>
+
+    <!-- Rewriting filter. Needed for modifying index.html to get resources from central.
+    See Showcase documentation to overwrite defaults-->
+    <filter>
+        <filter-name>RewriterFilter</filter-name>
+        <filter-class>com.avaloq.afp.fdk.banklet.rewriter.RewriterFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RewriterFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>com.avaloq.afp.fdk.banklet.i18n.LocaleFilter</filter-class>
+    </filter>
+
+    <!-- configures caching of javascript resources -->
+    <filter>
+        <filter-name>ExpiresByNameFilter</filter-name>
+        <filter-class>com.avaloq.afp.fdk.banklet.web.ExpiresByNameFilter</filter-class>
+        <!-- cache app.js for 30 days -->
+        <init-param>
+            <param-name>ExpiresByName app.*\.js</param-name>
+            <param-value>access plus 30 days</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ExpiresByName angular\-locale.*\.js</param-name>
+            <param-value>access plus 30 days</param-value>
+        </init-param>
+        <!-- disable caching for all other js resources -->
+        <init-param>
+            <param-name>ExpiresByName .*\.js</param-name>
+            <param-value>access plus 0 seconds</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/REPLACE_WITH_BANKLET_NAME/index.html</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ExpiresByNameFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ExpiresByNameFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+</web-app>
