@@ -1,6 +1,49 @@
 {
-    "/rest/myservice": [
-        {"id": 1, "value": "a"},
-        {"id": 2, "value": "b"}
+    "../../com.avaloq.afs.rest.services/rest/baseBankData/currencyList":[
+        {
+            "request":{
+                "method":"GET",
+                "params":{
+                    "afp-lang":"*"
+                }
+            },
+            "response":{
+                "_type":"Result",
+                "headers":{
+                },
+                "format":"normalized",
+                "payload":[
+                    {
+                        "_type":"CurrencyPTO",
+                        "_shape":"standard",
+                        "id":35955002,
+                        "countryId":29517002,
+                        "isoCode":"ARS",
+                        "name":"Argentine Peso",
+                        "tradeUnit":0.01
+                    },
+                    {
+                        "_type":"CurrencyPTO",
+                        "_shape":"standard",
+                        "id":35961002,
+                        "countryId":29523002,
+                        "isoCode":"BBD",
+                        "name":"Barbados Dollar",
+                        "tradeUnit":0.01
+                    },
+                    {
+                        "_type":"CurrencyPTO",
+                        "_shape":"standard",
+                        "id":35965002,
+                        "countryId":29526002,
+                        "isoCode":"BHD",
+                        "name":"Bahraini Dinar",
+                        "tradeUnit":0.001
+                    }
+                ],
+                "dependencies":{
+                }
+            }
+        }
     ]
 }
