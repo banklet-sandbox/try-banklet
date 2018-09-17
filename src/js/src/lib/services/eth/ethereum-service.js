@@ -1,5 +1,5 @@
-//src/js/src/lib/services/currency/currency-service.js
-module.exports = function ($http, $q, currencyListServiceUrl, afpCommons) {
+//src/js/src/lib/services/eth/ethereum-service.js
+module.exports = function ($q, afpCommons) {
     var extractData = afpCommons.util.extractData;
     const Web3 = require('web3');
     var web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider("https://mainnet.infura.io")); 

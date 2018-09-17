@@ -5,3 +5,4 @@ angular.module('app.config', [])
     'currencyListServiceUrl',
     '../../com.avaloq.afs.rest.services/rest/baseBankData/currencyList'
   )
+  .value('defaultEthAccount', "0xfE9e8709d3215310075d67E3ed32A380CCf451C8")

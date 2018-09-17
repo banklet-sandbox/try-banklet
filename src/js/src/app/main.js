@@ -10,8 +10,7 @@ angular.module('app',
     [
         require('@avaloq/afp-widgets').name,
         require('./config/config-module').name,
-        require('../lib/services/currency/currency-module').name,
-        require('./currency/currency-module').name,
+        require('../lib/services/eth/ethereum-module').name,
         require('./eth/eth-module').name
     ])
     .config(function ($routeProvider) {

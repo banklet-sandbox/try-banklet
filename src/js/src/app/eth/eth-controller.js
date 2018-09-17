@@ -1,4 +1,4 @@
-module.exports = function ($scope, ethereumService, afpTableModelService, afpCommons) {
+module.exports = function ($scope, ethereumService, afpTableModelService, afpCommons, defaultEthAccount) {
     console.log("eth controller");
     var _ = afpCommons.lodash,
         fieldNames = [["TokenShortName", "TokenAddress", "Balance"]];
@@ -10,7 +10,7 @@ module.exports = function ($scope, ethereumService, afpTableModelService, afpCom
 
 
     $scope.currencies = [];
-    $scope.ethAccount = "0xfE9e8709d3215310075d67E3ed32A380CCf451C8";
+    $scope.ethAccount = defaultEthAccount;
     $scope.tableModel = getTableModel();
     $scope.actionBarModel = [{
         'icon': 'chevron-right',
